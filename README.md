@@ -1,5 +1,26 @@
 # Online Sports Turf Playground Booking System
  An application developed using Python Flask. A simple framework for building complex web applications.
+## Project Setup
+```
+$ pip install Flask
+```
+## Hello World Example
+Create a file called hello.py
+```
+from flask import Flask
+app = Flask(__name__)
+
+@app.route("/")
+def index():
+return "Hello World!"
+
+if __name__ == "__main__":
+app.run(host='0.0.0.0', port=4000)
+```
+Finally run the web app using this command:
+```
+$ python hello.py
+```
 ## Modules 
  
 The system comprises of 3 major modules with their sub-modules as follows:
