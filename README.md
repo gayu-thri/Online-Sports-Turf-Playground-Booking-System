@@ -2,7 +2,7 @@
  An application developed using Python Flask
 <h1> Modules </h1>
  <p>
-The system comprises of 3 major modules with their sub-modules as follows: <br>
+The system comprises of 3 major modules with their sub-modules as follows: <br><br>
 1. Admin <br>
 2. Manager <br>
 3. Users Login <br>
