@@ -1,5 +1,5 @@
 # Online Sports Turf Playground Booking System
- An application developed using Python Flask
+ An application developed using Python Flask framework
 <h1> Modules </h1>
  <p>
 The system comprises of 3 major modules with their sub-modules as follows: <br><br>
