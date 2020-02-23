@@ -1,15 +1,15 @@
 # Online Sports Turf Playground Booking System
  An application developed using Python Flask framework
-<h1> Modules </h1>
+<h3> Modules </h3>
  <p>
 The system comprises of 3 major modules with their sub-modules as follows: <br><br>
 1. Admin <br>
 2. Manager <br>
 3. Users Login <br>
 </p>
-<h1> Functionality of each module </h1>
+<h3> Functionality of each module </h3>
 <p>
-<strong>
+<strong> <br>
 1. Admin: <br><br>  
 <ul>
 <li>Add Manager:</strong> Admin can add turf location and manager of the respective turf
