@@ -31,7 +31,7 @@ location. </li> <br>
 </ul>
 <br>
 <strong>
-3. Users Login:
+3. Users Login: <br> <br>
 <ul>
 <li>Check Turf:</strong> User can check for turf of nearby location and prices.</li> <br>
 <strong><li>Check Availability:</strong> User can see the availability of the respective turf which is
