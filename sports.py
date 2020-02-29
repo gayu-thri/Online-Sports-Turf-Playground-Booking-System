@@ -151,8 +151,12 @@ def home_user():
     if request.form['submit_button'] == 'Book a turf':
         return render_template('book_turf.html')
 
+    if active in au.keys():
+        rl = au[active]
+    else:
+        rl = None
     if request.form['submit_button'] == 'My history':
-        return render_template('my_history.html')
+        return render_template('my_history.html',out=rl)
 
     if request.form['submit_button'] == 'View visits':
         return render_template('visitors.html', v=visit)
