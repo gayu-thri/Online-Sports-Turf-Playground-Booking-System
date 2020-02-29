@@ -204,16 +204,16 @@ def home_manager():
             for user,loc in reqs.items():
                 if loc == assigned_loc:
                     viewreqs[user] = assigned_loc
-            return render_template('book_turf.html', v = list(viewreqs.items()))
+            return render_template('view_request.html', v = list(viewreqs.items()))
 
-    if request.form['submit_button'] == 'Confirm Booking':
-        return render_template('book_turf.html')
+    if request.form['submit_button'] == 'Confirm Booking':  ###WORK - NOT YET FINISHED
+        return render_template('confirm_booking.html')
 
-    if request.form['submit_button'] == 'Bill Generation':
-        return render_template('book_turf.html')
+    if request.form['submit_button'] == 'Bill Generation':  ###WORK - NOT YET FINISHED
+        return render_template('bill_generation.html')
 
-    if request.form['submit_button'] == 'Booking History':
-        return render_template('book_turf.html')
+    if request.form['submit_button'] == 'Booking History':  ###WORK - NOT YET FINISHED
+        return render_template('booking_history.html')
 
     if request.form['submit_button'] == 'View visits':
         return render_template('visitors.html', v=visit)
