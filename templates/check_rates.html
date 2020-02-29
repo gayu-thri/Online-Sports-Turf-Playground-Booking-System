@@ -1,0 +1,18 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Check rate of turf</title>
+    <link rel="stylesheet" type= "text/css" href="{{ url_for('static', filename='/turf.css') }}">
+</head>
+<body>
+<form action="/rate" method="POST">
+<div class="login" style="margin:auto;
+top: 50%; left: 50%;">
+<h1>Check rates of turfs</h1>
+    <input type="text" class="login-field" value="" placeholder="Enter the turf rate you want to know" name="loc">
+<input type="submit" name="submit_button" value="Click here for price" class="button">
+</div>
+</form>
+</body>
+</html>

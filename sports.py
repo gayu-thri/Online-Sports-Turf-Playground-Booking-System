@@ -81,6 +81,10 @@ def home_admin():
     if request.form['submit_button'] == 'Add turf location':
         return render_template('add_location.html',l = ",".join(location))
 
+    global manager
+    if request.form['submit_button'] == 'Provide credentials & Add a manager':
+        return render_template('add_manager.html',mavail = ",".join(manager.keys()))
+
     global am
     l = list(am.items())
     if request.form['submit_button'] == 'Allocate a manager':
@@ -107,6 +111,13 @@ def add_location():
         location.append(request.form['location'])
         return "After addition, the available locations are: " + ",".join(location) #list passing
 
+@app.route('/add_manager',methods=["POST"])
+def add_manager():
+    global manager
+    if request.form['submit_button'] == 'Add the manager':
+        manager[request.form['muname']] = request.form['mpass']
+        return "Successfully added manager with credentials: " + "Username- "+request.form['muname'] + "Password-" + request.form['mpass']
+
 @app.route('/allocate_manager',methods=["POST"])
 def allocate_manager():
     global am
@@ -121,17 +132,6 @@ def add_price():
         price[request.form['loc']] = request.form['price']
         return "After addition, the available locations are: " + str(list(price.items()))
 
-@app.route('/home_manager', methods=["POST"])
-def home_manager():
-    global visit
-    visit = visit + 1
-
-    if request.form['submit_button'] == 'View visits':
-        return render_template('visitors.html', v=visit)
-    if request.form['submit_button'] == 'Log out':
-        return logout()
-    if request.form['submit_button'] == 'Contact':
-        return render_template('contact.html')
 
 @app.route('/home_user', methods=["POST"])
 def home_user():
@@ -183,6 +183,39 @@ def book_turf():
             return "Requested for: "+ active + ":" + temp
         else:
             return temp + " location not available !! Sorry "
+
+
+@app.route('/home_manager', methods=["POST"])
+def home_manager():
+    global visit
+    visit = visit + 1
+
+    if request.form['submit_button'] == 'Check rates':
+        return render_template('check_rates.html')
+    if request.form['submit_button'] == 'View Request':
+        return render_template('book_turf.html')
+    if request.form['submit_button'] == 'Confirm Booking':
+        return render_template('book_turf.html')
+    if request.form['submit_button'] == 'Bill Generation':
+        return render_template('book_turf.html')
+    if request.form['submit_button'] == 'Booking History':
+        return render_template('book_turf.html')
+
+    if request.form['submit_button'] == 'View visits':
+        return render_template('visitors.html', v=visit)
+    if request.form['submit_button'] == 'Log out':
+        return logout()
+    if request.form['submit_button'] == 'Contact':
+        return render_template('contact.html')
+
+@app.route('/rate', methods=["POST"])
+def rate():
+    global price
+    if request.form['loc'] in price.keys():
+        var = price[request.form['loc']]
+        return "The price for the requested location "+ request.form['loc'] + " is :"+ str(var)
+    else:
+        return "Sorry!! The requested location is not available"
 
 @app.route('/contactexp', methods=["GET"])
 def contactexp():
