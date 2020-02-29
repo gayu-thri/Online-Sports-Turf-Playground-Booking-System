@@ -35,6 +35,7 @@ price={'Chennai':500}
 am = {'manager1':'Chennai'}
 au = {'user1':'Chennai'}
 avail_turf = []
+reqs = {'user2':'Bangalore'}
 
 active = None
 visit = 0       #for calculating the number of visits for a web page.
