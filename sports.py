@@ -114,14 +114,14 @@ def add_location():
     global location
     if request.form['submit_button'] == 'Add':
         location.append(request.form['location'])
-        return "After addition, the available locations are: " + ",".join(location)
+        return "After addition, the available locations are: " + ",".join(location) #list passing
 
 @app.route('/allocate_manager',methods=["POST"])
 def allocate_manager():
     global am
     if request.form['submit_button'] == 'Add':
         am[request.form['man']] = request.form['loc']
-        return "After addition, the available locations are: " + str(list(am.items()))
+        return "After addition, the available locations are: " + str(list(am.items())) #dict passing
 
 @app.route('/add_price',methods=["POST"])
 def add_price():
@@ -134,6 +134,18 @@ def add_price():
 def home_manager():
     global visit
     visit = visit + 1
+
+    global price
+    if request.form['submit_button'] == 'Check turf':
+        return render_template('check_turf.html',p=str(list(price.items())))
+
+    if request.form['submit_button'] == 'Check availability':
+        return render_template('check_availability.html')
+    if request.form['submit_button'] == 'Book a turf':
+        return render_template('book_turf.html')
+    if request.form['submit_button'] == 'My history':
+        return render_template('my_history.html')
+
     if request.form['submit_button'] == 'View visits':
         return render_template('visitors.html', v=visit)
     if request.form['submit_button'] == 'Log out':
