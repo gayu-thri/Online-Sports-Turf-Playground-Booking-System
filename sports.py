@@ -24,12 +24,12 @@ app = Flask(__name__)
 global active
 global email
 global visit
-global location
+global location,viewreqs
 global am   ##allocation of manager to a turf  manager:turf
 global au,avail_turf   ##allocation of user to a turf  user:turf
 global price,reqs  ##request - user:turf
 
-
+viewreqs = {}
 location=['Chennai','Bangalore','Coimbatore']
 price={'Chennai':500}
 am = {'manager1':'Chennai'}
@@ -94,8 +94,9 @@ def home_admin():
     if request.form['submit_button'] == 'Add price list':
         return render_template('add_price.html',p = list(price.items()))
 
+    global au,reqs
     if request.form['submit_button'] == 'View booking':         ###WORK - NOT YET FINISHED
-        return render_template('view_booking.html')
+        return render_template('view_booking.html',b= list(au.items()),r=list(reqs.items()))
 
     if request.form['submit_button'] == 'View visits':
         return render_template('visitors.html', v=visit)
@@ -192,12 +193,25 @@ def home_manager():
 
     if request.form['submit_button'] == 'Check rates':
         return render_template('check_rates.html')
+
+    global reqs,am, viewreqs
+
     if request.form['submit_button'] == 'View Request':
-        return render_template('book_turf.html')
+        if active not in am.keys():
+            return "You don't have a turf location alloted to you!! Hence no requests will be visible to you.. Contact admin"
+        else:
+            assigned_loc = am[active]
+            for user,loc in reqs.items():
+                if loc == assigned_loc:
+                    viewreqs[user] = assigned_loc
+            return render_template('book_turf.html', v = list(viewreqs.items()))
+
     if request.form['submit_button'] == 'Confirm Booking':
         return render_template('book_turf.html')
+
     if request.form['submit_button'] == 'Bill Generation':
         return render_template('book_turf.html')
+
     if request.form['submit_button'] == 'Booking History':
         return render_template('book_turf.html')
 
