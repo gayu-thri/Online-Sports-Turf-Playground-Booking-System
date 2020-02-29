@@ -27,7 +27,7 @@ global visit
 global location
 global am   ##allocation of manager to a turf  manager:turf
 global au,avail_turf   ##allocation of user to a turf  user:turf
-global price
+global price,reqs  ##request - user:turf
 
 
 location=['Chennai','Bangalore','Coimbatore']
@@ -155,8 +155,12 @@ def home_user():
         rl = au[active]
     else:
         rl = None
+    if active in reqs.keys():
+        re = reqs[active]
+    else:
+        re = None
     if request.form['submit_button'] == 'My history':
-        return render_template('my_history.html',out=rl)
+        return render_template('my_history.html',out=rl,req=re)   ##out- booked , req-requested
 
     if request.form['submit_button'] == 'View visits':
         return render_template('visitors.html', v=visit)
@@ -167,15 +171,15 @@ def home_user():
 
 @app.route('/book_turf',methods=["POST"])
 def book_turf():
-    global au,active
+    global au,active,reqs
     if request.form['submit_button'] == 'Book':
         temp = request.form['loc']
         if active in au.keys():
             var = au[active]
             return "Only 1 booking at a time !! Already booked- "+ active +": "+var
         if temp not in au.values() and temp in location:
-            au[active] = temp
-            return "Booked: "+ active + ":" + temp
+            reqs[active] = temp
+            return "Requested for: "+ active + ":" + temp
         else:
             return temp + " location not available !! Sorry "
 
