@@ -10,6 +10,7 @@ body {
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: 100% 100%;
+    align: right;
 }
 
 .logreg {
@@ -21,7 +22,7 @@ body {
     height:200px;
     border-color: transparent;
     border-image-outset: 10px;
-
+    align: right;
 }
 }
 .login {
@@ -33,6 +34,7 @@ body {
     height:120px;
     border-color: transparent;
     border-image-outset: 10px;
+    align: right;
 }
 
 
@@ -42,6 +44,7 @@ text-shadow: 0 0 10px
 rgba(0,0,0,0.3);
 letter-spacing:1px;
 text-align: center;
+align : right;
 }
 
 .login{
@@ -53,6 +56,7 @@ text-align: center;
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
+  align: right;
 
 }
 .radio{
@@ -66,9 +70,11 @@ text-align: center;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+  align:right;
 }
 .button{
 background: #008CBA;
+align:right;
 }
 
 .center {
@@ -77,6 +83,7 @@ background: #008CBA;
   border: 3px solid green;
   padding: 10px;
   text-align: center;
+  align: right;
 }
 
 
@@ -98,5 +105,6 @@ input {
     -o-transition: box-shadow .5s ease;
     -ms-transition: box-shadow .5s ease;
     transition: box-shadow .5s ease;
+    align:right;
 }
-input:focus { box-shadow: inset 0 -5px 45px rgba(100,100,100,0.4), 0 1px 1px rgba(255,255,255,0.2); }
+input:focus { box-shadow: inset 0 -5px 45px rgba(100,100,100,0.4), 0 1px 1px rgba(255,255,255,0.2); align:right;}

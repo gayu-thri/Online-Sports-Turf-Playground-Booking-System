@@ -1,0 +1,24 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Login</title>
+    <link rel="stylesheet" type= "text/css" href="{{ url_for('static', filename='/turf.css') }}">
+</head>
+<body>
+<form action="/login" method="POST">
+<div class="login" style="margin:auto;
+top: 50%; left: 50%;">
+<h1>Login</h1>
+    <input type="text" class="login-field" value="" placeholder="username" name="username">
+    <input type="password" class="login-field" value="" placeholder="password" name="password">
+<div style="padding-left: 100px;">
+                <input type="radio" name="choice" value="admin" checked>User<br><br>
+                <input type="radio" name="choice" value="manager">Manager<br><br>
+                <input type="radio" name="choice" value="user">User
+            </div>
+<input type="submit" value="Log in" class="button">
+</div>
+</form>
+</body>
+</html>
