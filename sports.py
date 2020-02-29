@@ -48,7 +48,7 @@ def do_admin_login():
             session['logged_in'] = True
         else:
             return redirect('/error')
-        return render_template('home.html',email=active)
+        return render_template('home_user.html',email=active)
 
     elif request.form['choice'] == 'admin':
         if request.form['username'] in admin and admin[request.form['username']] == request.form['password']:
@@ -56,7 +56,7 @@ def do_admin_login():
             session['logged_in'] = True
         else:
             return redirect('/error')
-        return render_template('home.html',email=active)
+        return render_template('home_admin.html',email=active)
 
     elif request.form['choice'] == 'manager':
         if request.form['username'] in manager and manager[request.form['username']] == request.form['password']:
@@ -64,7 +64,7 @@ def do_admin_login():
             session['logged_in'] = True
         else:
             return redirect('/error')
-        return render_template('home.html',email=active)
+        return render_template('home_manager.html',email=active)
 
 @app.route('/home', methods=["POST"])
 def home_page():
