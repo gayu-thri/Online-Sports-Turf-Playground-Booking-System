@@ -25,27 +25,17 @@ global active
 global email
 global visit
 global location
-global am   ##allocation of manager to a turf
+global am   ##allocation of manager to a turf  manager:turf
+global au,avail_turf   ##allocation of user to a turf  user:turf
 global price
+
 
 location=['Chennai','Bangalore','Coimbatore']
 price={'Chennai':500}
 am = {'manager1':'Chennai'}
-'''
-global status
-global courier
+au = {'user1':'Chennai'}
+avail_turf = []
 
-status = {
-    'courier1' : 'reached',
-    'courier2' : 'out for delivery',
-    'courier3' : 'dispatched'
-}
-location = {
-    'courier1' : 'Chennai',
-    'courier2' : 'Bangalore',
-    'courier3' : 'Coimbatore'
-}
-'''
 active = None
 visit = 0       #for calculating the number of visits for a web page.
 
@@ -135,17 +125,6 @@ def home_manager():
     global visit
     visit = visit + 1
 
-    global price
-    if request.form['submit_button'] == 'Check turf':
-        return render_template('check_turf.html',p=str(list(price.items())))
-
-    if request.form['submit_button'] == 'Check availability':
-        return render_template('check_availability.html')
-    if request.form['submit_button'] == 'Book a turf':
-        return render_template('book_turf.html')
-    if request.form['submit_button'] == 'My history':
-        return render_template('my_history.html')
-
     if request.form['submit_button'] == 'View visits':
         return render_template('visitors.html', v=visit)
     if request.form['submit_button'] == 'Log out':
@@ -157,12 +136,44 @@ def home_manager():
 def home_user():
     global visit
     visit = visit + 1
+
+    global price
+    if request.form['submit_button'] == 'Check turf':
+        return render_template('check_turf.html', p=str(list(price.items())))
+
+    global au,avail_turf
+    for ch in location:  ## checks from locations & not in allocated!!
+        if ch not in au.values():
+            avail_turf.append(ch)
+    if request.form['submit_button'] == 'Check availability':
+        return render_template('check_availability.html',u=",".join(avail_turf))
+
+    if request.form['submit_button'] == 'Book a turf':
+        return render_template('book_turf.html')
+
+    if request.form['submit_button'] == 'My history':
+        return render_template('my_history.html')
+
     if request.form['submit_button'] == 'View visits':
         return render_template('visitors.html', v=visit)
     if request.form['submit_button'] == 'Log out':
         return logout()
     if request.form['submit_button'] == 'Contact':
         return render_template('contact.html')
+
+@app.route('/book_turf',methods=["POST"])
+def book_turf():
+    global au,active
+    if request.form['submit_button'] == 'Book':
+        temp = request.form['loc']
+        if active in au.keys():
+            var = au[active]
+            return "Only 1 booking at a time !! Already booked- "+ active +": "+var
+        if temp not in au.values() and temp in location:
+            au[active] = temp
+            return "Booked: "+ active + ":" + temp
+        else:
+            return temp + " location not available !! Sorry "
 
 @app.route('/contactexp', methods=["GET"])
 def contactexp():
