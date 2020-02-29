@@ -6,9 +6,18 @@ user = {}
 admin = {}
 manager = {}
 
-user['user@gmail.com'] = 'password'
+user = {
+'user1@gmail.com' : 'password',
+'user2@gmail.com' : 'password',
+'user3@gmail.com' : 'password'
+}
 admin['admin@gmail.com'] = 'password'
-manager['manager@gmail.com'] = 'password'
+
+manager = {
+'manager1@gmail.com' : 'password',
+'manager2@gmail.com' : 'password',
+'manager3@gmail.com' : 'password'
+}
 
 app = Flask(__name__)
 
