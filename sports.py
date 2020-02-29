@@ -7,16 +7,16 @@ admin = {}
 manager = {}
 
 user = {
-'user1@gmail.com' : 'password',
-'user2@gmail.com' : 'password',
-'user3@gmail.com' : 'password'
+'user1' : 'password',
+'user2' : 'password',
+'user3' : 'password'
 }
-admin['admin@gmail.com'] = 'password'
+admin['admin'] = 'password'
 
 manager = {
-'manager1@gmail.com' : 'password',
-'manager2@gmail.com' : 'password',
-'manager3@gmail.com' : 'password'
+'manager1' : 'password',
+'manager2' : 'password',
+'manager3' : 'password'
 }
 
 app = Flask(__name__)
@@ -25,9 +25,12 @@ global active
 global email
 global visit
 global location
+global am   ##allocation of manager to a turf
+global price
 
 location=['Chennai','Bangalore','Coimbatore']
-
+price={'Chennai':500}
+am = {'manager1':'Chennai'}
 '''
 global status
 global courier
@@ -87,10 +90,15 @@ def home_admin():
     if request.form['submit_button'] == 'Add turf location':
         return render_template('add_location.html',l = ",".join(location))
 
+    global am
+    l = list(am.items())
     if request.form['submit_button'] == 'Allocate a manager':
-        return render_template('allocate_manager.html')
+        return render_template('allocate_manager.html',a = l)
+
+    global price
     if request.form['submit_button'] == 'Add price list':
-        return render_template('add_price.html')
+        return render_template('add_price.html',p = list(price.items()))
+
     if request.form['submit_button'] == 'View booking':
         return render_template('view_booking.html')
 
@@ -107,6 +115,20 @@ def add_location():
     if request.form['submit_button'] == 'Add':
         location.append(request.form['location'])
         return "After addition, the available locations are: " + ",".join(location)
+
+@app.route('/allocate_manager',methods=["POST"])
+def allocate_manager():
+    global am
+    if request.form['submit_button'] == 'Add':
+        am[request.form['man']] = request.form['loc']
+        return "After addition, the available locations are: " + str(list(am.items()))
+
+@app.route('/add_price',methods=["POST"])
+def add_price():
+    global price
+    if request.form['submit_button'] == 'Add':
+        price[request.form['loc']] = request.form['price']
+        return "After addition, the available locations are: " + str(list(price.items()))
 
 @app.route('/home_manager', methods=["POST"])
 def home_manager():
