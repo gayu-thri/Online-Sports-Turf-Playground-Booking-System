@@ -99,7 +99,7 @@ def home_admin():
     if request.form['submit_button'] == 'Add price list':
         return render_template('add_price.html',p = list(price.items()))
 
-    if request.form['submit_button'] == 'View booking':
+    if request.form['submit_button'] == 'View booking':         ###WORK - NOT YET FINISHED
         return render_template('view_booking.html')
 
     if request.form['submit_button'] == 'View visits':
