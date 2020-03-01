@@ -24,12 +24,13 @@ app = Flask(__name__)
 global active
 global email
 global visit
-global location,viewreqs,booking_hist
+global location,viewreqs,booking_hist,viewbook
 global am   ##allocation of manager to a turf  manager:turf
 global au,avail_turf   ##allocation of user to a turf  user:turf
 global price,reqs  ##request - user:turf
 
 viewreqs = {}
+viewbook = {}
 location=['Chennai','Bangalore','Coimbatore']
 price={'Chennai':500}
 am = {'manager1':'Chennai'}
@@ -220,8 +221,13 @@ def home_manager():
     if request.form['submit_button'] == 'Bill Generation':
         return render_template('bill_generation.html')
 
+    global viewbook
     if request.form['submit_button'] == 'Booking History':  ###WORK - NOT YET FINISHED
-        return render_template('booking_history.html')
+        assigned_loc = am[active]
+        for user,loc in au.items():
+            if loc == assigned_loc:
+                viewbook[user] = assigned_loc
+        return render_template('booking_history.html',l=assigned_loc,u = list(viewbook.keys()))
 
     if request.form['submit_button'] == 'View visits':
         return render_template('visitors.html', v=visit)
