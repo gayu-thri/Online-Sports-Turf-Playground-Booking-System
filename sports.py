@@ -24,7 +24,7 @@ app = Flask(__name__)
 global active
 global email
 global visit
-global location,viewreqs
+global location,viewreqs,booking_hist
 global am   ##allocation of manager to a turf  manager:turf
 global au,avail_turf   ##allocation of user to a turf  user:turf
 global price,reqs  ##request - user:turf
@@ -36,7 +36,7 @@ am = {'manager1':'Chennai'}
 au = {'user1':'Chennai'}
 avail_turf = []
 reqs = {'user2':'Bangalore'}
-
+booking_hist = []
 active = None
 visit = 0       #for calculating the number of visits for a web page.
 
@@ -95,7 +95,7 @@ def home_admin():
         return render_template('add_price.html',p = list(price.items()))
 
     global au,reqs
-    if request.form['submit_button'] == 'View booking':         ###WORK - NOT YET FINISHED
+    if request.form['submit_button'] == 'View Booking':
         return render_template('view_booking.html',b= list(au.items()),r=list(reqs.items()))
 
     if request.form['submit_button'] == 'View visits':
@@ -194,7 +194,7 @@ def home_manager():
     if request.form['submit_button'] == 'Check rates':
         return render_template('check_rates.html')
 
-    global reqs,am, viewreqs
+    global reqs, am, viewreqs
 
     if request.form['submit_button'] == 'View Request':
         if active not in am.keys():
@@ -206,10 +206,18 @@ def home_manager():
                     viewreqs[user] = assigned_loc
             return render_template('view_request.html', v = list(viewreqs.items()))
 
-    if request.form['submit_button'] == 'Confirm Booking':  ###WORK - NOT YET FINISHED
-        return render_template('confirm_booking.html')
+    if request.form['submit_button'] == 'Confirm Booking':
+        if active not in am.keys():
+            return "You don't have a turf location alloted to you!! Hence no requests will be visible to you.. Contact admin"
+        else:
+            assigned_loc = am[active]
+            for user,loc in reqs.items():
+                if loc == assigned_loc:
+                    viewreqs[user] = assigned_loc
+            return render_template('confirm_booking.html',general=list(reqs.items()),mine=list(viewreqs.items()))
 
-    if request.form['submit_button'] == 'Bill Generation':  ###WORK - NOT YET FINISHED
+    global price
+    if request.form['submit_button'] == 'Bill Generation':
         return render_template('bill_generation.html')
 
     if request.form['submit_button'] == 'Booking History':  ###WORK - NOT YET FINISHED
@@ -221,6 +229,30 @@ def home_manager():
         return logout()
     if request.form['submit_button'] == 'Contact':
         return render_template('contact.html')
+
+@app.route('/generate_bill',methods=["POST"])
+def generate_bill():
+    usr = request.form['usr']
+    if request.form['submit_button'] == 'Generate':
+        if usr not in au.keys():
+            return "The entered user ("+usr+") has no booking confirmed."
+        else:
+            lo = au[usr]
+            pr = price[lo]
+            return render_template('generate_bill.html',u = usr,l = lo, p = pr)
+
+
+@app.route('/confirm',methods=["POST"])
+def confirm():
+    global au
+    if request.form['submit_button'] == 'Confirm':
+        usr = request.form['usr']
+        loc = request.form['loc']
+        if loc in au.values():
+            return "Sorry!! Location "+ loc + " is already booked."
+        else:
+            au[usr] = loc
+            return "Successfully booked "+ loc + " for the user: "+usr
 
 @app.route('/rate', methods=["POST"])
 def rate():

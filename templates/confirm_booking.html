@@ -1,0 +1,22 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Confirm Booking</title>
+    <link rel="stylesheet" type= "text/css" href="{{ url_for('static', filename='/turf.css') }}">
+</head>
+<body>
+<form action="/confirm" method="POST">
+<div class="login" style="margin:auto;
+top: 50%; left: 50%;">
+<h1>Confirm Booking</h1>
+    <p>All the requests to all locations as of now are : {{general}}</p>
+                                <br>
+    <p>Requests to MY LOCATIONS as of now are : {{mine}}</p>
+    <input type="text" class="login-field" value="" placeholder="Enter user you want to confirm" name="usr">
+    <input type="text" class="login-field" value="" placeholder="Enter the location requested for" name="loc">
+<input type="submit" name="submit_button" value="Confirm" class="button">
+</div>
+</form>
+</body>
+</html>

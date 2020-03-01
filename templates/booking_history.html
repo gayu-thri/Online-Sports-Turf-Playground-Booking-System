@@ -1,0 +1,18 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking History</title>
+    <link rel="stylesheet" type= "text/css" href="{{ url_for('static', filename='/turf.css') }}">
+</head>
+<body>
+<form action="/generate_bill" method="POST">
+<div class="login" style="margin:auto;
+top: 50%; left: 50%;">
+<h1>Booking history for my allocated location: {{loc}}</h1>
+    <input type="text" class="login-field" value="" placeholder="Enter user you want to generate the bill" name="usr">
+<input type="submit" name="submit_button" value="Generate" class="button">
+</div>
+</form>
+</body>
+</html>
