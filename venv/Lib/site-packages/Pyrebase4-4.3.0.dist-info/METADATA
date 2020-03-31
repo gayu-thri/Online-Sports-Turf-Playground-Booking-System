@@ -1,0 +1,24 @@
+Metadata-Version: 2.1
+Name: Pyrebase4
+Version: 4.3.0
+Summary: A simple python wrapper for the Firebase API with current deps
+Home-page: https://github.com/nhorvath/Pyrebase4
+Author: nhorvath
+Author-email: UNKNOWN
+License: MIT
+Keywords: Firebase
+Platform: UNKNOWN
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3.4
+Requires-Dist: requests (>=2.19.1)
+Requires-Dist: requests-toolbelt (>=0.7.1)
+Requires-Dist: gcloud (==0.18.3)
+Requires-Dist: oauth2client (==4.1.2)
+Requires-Dist: python-jwt (==2.0.1)
+Requires-Dist: pycryptodome (>=3.6.4)
+
+UNKNOWN
+
+
