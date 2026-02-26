@@ -1,5 +1,8 @@
 # Online Sports Turf Playground Booking System
  An application developed using Python Flask. A simple framework for building complex web applications.
+
+![Basketball Background](static/basketball-background-hd.jpg)
+ 
 ## Project Setup
 ```
 $ pip install Flask
